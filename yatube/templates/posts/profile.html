@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %}
+  Профайл пользователя {{ author.username }}
+{% endblock %}
+{% block content %}
+  <div class="container py-5">
+    <h1>Все посты пользователя {{ author.get_full_name }} </h1>
+    <h3>Всего постов: {{ author.posts.count }}</h3>
+    <div class="mb-3">
+      {% if author != request.user %}
+        {% if following %}
+          <a
+            class="btn btn-lg btn-light"
+            href="{% url 'posts:profile_unfollow' author.username %}" role="button"
+          >
+            Отписаться
+          </a>
+        {% else %}
+          <a
+            class="btn btn-lg btn-primary"
+            href="{% url 'posts:profile_follow' author.username %}" role="button"
+          >
+            Подписаться
+          </a>
+        {% endif %}
+      {% endif %}
+    </div>
+    <div>
+      {% for post in page_obj %}
+        <ul>
+          <li>
+            Дата публикации: {{ post.pub_date|date:"d E Y" }}
+          </li>
+          {% if post.group %}
+            <li>
+              Группа: 
+              <a href="{% url 'posts:group_posts' post.group.slug %}">
+                {{ post.group.title }} 
+                <!--По моему скромному мнению, это выглядит куда лучше,
+                чем отдальная строчка с кнопкой 'все посты группы'-->
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+        {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
+          <img class="card-img my-2" src="{{ im.url }}">
+        {% endthumbnail %}
+        <p>{{ post.text|linebreaks }}</p>
+        <button type="button" class="btn btn-light">
+          <a
+            href = "{% url 'posts:post_detail' post.pk %}"
+            class="btn btn-info pull-right"
+          >
+            Просмотреть запись
+          </a>
+        </button>
+        {% if not forloop.last %}<hr>{% endif %}
+      {% endfor %}
+      {% include 'posts/includes/paginator.html' %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Про автора
+{% endblock %}
+{% block content %}
+  <div class="container text-center">
+    <h1>
+      Кто же я такой?
+    </h1>
+    <p class="row">
+      <h6>Это довольно сложный вопрос.</h6>Кто-то мог бы ответить: 
+      <em>Меня определяет то, что я делаю.</em> 
+      Интересный вариант. Тогда я начинающий программист, который 
+      очень любит игры, интересующийся наукой, экономикой и 
+      много чем ещё.
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 col-xl-6 text-center">
+        <img src="{% static "img/boss.jpg" %}" width="300" title="Кто у нас такой класный?">
+      </div>
+      <div class="col-12 col-md-6 col-xl-6 text-center">
+        <img src="{% static "img/bow.jpg" %}" width="300" title="Обожаю лук. Не тот, который для еды">
+      </div>
+    </div>
+  </div>
+  <div class="container text-center">
+    <h1>
+      И как я это сделал?
+    </h2>
+    <p class="row">
+      <h6>
+        Даже не знаю кого больше благодарить:
+      </h6>
+      <em>Свою Целеустремленность или Яндекс.Практикум?</em>
+      <br>
+      Пожалуй, свою лепту внесли все и всё.
+      <br>
+      А вот что касается вдохновения... 
+      Я впечатлялся работой людей, которые создают игры 
+      с помощью Python. Ну и то насколько плоха моя текущая работа, 
+      тоже поспособствовало.
+      <h6>
+        Контакты
+      </h6>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 text-center">
+        <a href="https://vk.com/id709955565" target="_blank">
+          <img src="{% static "img/vk.png" %}" width="135">
+        </a>
+      </div>
+      <div class="col-6 text-center">
+          <button type="button" class="btn btn-outline-light">
+            <img src="{% static "img/mail.png" %}"
+            width="100" title="Нажмите чтобы скопировать" onclick="copyText()">
+          </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function copyText() {
+      navigator.clipboard.writeText
+        ("doomnewera@gmail.com");
+    }
+  </script>
+{% endblock %}

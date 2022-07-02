@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Технологии Сайта
+{% endblock %}
+{% block content %}
+  <div class="container text-center">
+    <h2>
+      Технологии, использованные при создании сайта
+    </h2>
+      <div class="row">
+        <div class="col-12 col-md-6 text-center">
+          <ul style="list-style-type: none; font-weight: 600;">
+            <li>
+              <img src="{% static "img/python.png" %}" width="50">
+              <a href="https://ru.wikipedia.org/wiki/Python" target="_blank" title="Подробнее о Python">
+                  Python
+              </a>
+              - Основной язык программирования
+            </li>
+
+            <li>
+              <img src="{% static "img/html.png" %}" width="50">
+              <a href="https://ru.wikipedia.org/wiki/HTML" target="_blank" title="Подробнее о HTML">
+              HTML
+              </a>
+              —  язык гипертекстовой разметки документов для просмотра веб-страниц в браузере
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12 col-md-6 text-center">
+          <ul style="list-style-type: none; font-weight: 600;">
+            <li>
+              <img src="{% static "img/django.png" %}" width="70">
+              <a href="https://ru.wikipedia.org/wiki/Django" target="_blank" title="Подробнее о Django">
+              Django
+              </a>
+              - <span title="Фреймворк - это программная платформа, определяющая структуру программной системы"
+              style="text-decoration: underline #87cefa;">фреймворк</span> для веб-приложений Python
+            </li>
+
+            <li>
+              <img src="{% static "img/CSS.png" %}" width="50">
+              <a href="https://ru.wikipedia.org/wiki/CSS" target="_blank" title="Подробнее о CSS">
+              CSS
+              </a>
+              — формальный язык описания внешнего вида веб-страницы
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+{% endblock %}
