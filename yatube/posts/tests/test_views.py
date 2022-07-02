@@ -1,5 +1,6 @@
 import shutil
 import tempfile
+import time
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.cache import cache
@@ -9,14 +10,8 @@ from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from django import forms
 
-
-import time
-
 from posts.models import Post, Group, Follow
-from posts.views import POSTS_ON_VIEW  # не понятно в какой
-# settings перенести эту переменную, если в yatube/settings.py,
-# то этот файл не импортируется с помощью django.conf.settings,
-# это же находится в venv
+from posts.views import POSTS_ON_VIEW
 
 User = get_user_model()
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
@@ -61,11 +56,7 @@ class ViewsTest(TestCase):
         ]
         for i in range(1, 13):
             Post.objects.bulk_create(posts)
-            time.sleep(0.001)  # из-за того,что записи создаются одновременно,
-            # я не могу получить в тестах последнюю запись,
-            # ибо она всегда разная,
-            # как решить эту проблему без sleep не представляю,
-            # если создавать записи без bulk_create, то такой проблемы нет
+            time.sleep(0.001)
         cls.post = Post.objects.create(
             text='Post with author and group',
             author=cls.author,
@@ -321,7 +312,7 @@ class ViewsTest(TestCase):
             ).content
         )
 
-    def test_authenticated_user_can_follow_and_unfollow(self):
+    def test_authenticated_user_can_follow(self):
         self.assertRedirects(
             self.authorized_client.get(
                 reverse(
@@ -339,6 +330,14 @@ class ViewsTest(TestCase):
                 user=self.user,
                 author=self.author
             ).exists()
+        )
+
+    def test_authenticated_user_can_unfollow(self):
+        self.authorized_client.get(
+            reverse(
+                'posts:profile_follow',
+                kwargs={'username': self.author.username}
+            )
         )
         self.assertRedirects(
             self.authorized_client.get(

@@ -10,7 +10,7 @@
       <ul class="nav nav-pills">
         <li class="nav-item">
           <a class="nav-link
-            {% if view_name  == 'about:author' %}
+            {% if view_name == 'about:author' %}
               active
             {% endif %}"
           href="{% url 'about:author' %}">
@@ -30,7 +30,7 @@
         {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link link-light
-              {% if view_name == 'posts:post_create' %}
+              {% if view_name == 'index:post_create' %}
                 active
               {% endif %}"
               href="{% url 'posts:post_create' %}"
