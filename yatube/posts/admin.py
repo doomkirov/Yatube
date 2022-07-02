@@ -16,9 +16,5 @@ class GroupAdmin(admin.ModelAdmin):
     search_fields = ('title',)
 
 
-class FollowAdmin(admin.ModelAdmin):
-    list_display: ('user', 'author')
-
 admin.site.register(Post, PostAdmin)
 admin.site.register(Group, GroupAdmin)
-admin.site.register(Follow, FollowAdmin)

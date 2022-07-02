@@ -84,6 +84,7 @@ def post_edit(request, post_id):
         'post': post,
     })
 
+
 @login_required
 def add_comment(request, post_id):
     form = CommentForm(request.POST or None)
@@ -94,12 +95,19 @@ def add_comment(request, post_id):
         comment.save()
     return redirect('posts:post_detail', post_id)
 
+
 @login_required
 def follow_index(request):
-    following = Follow.objects.filter(user=request.user).values_list('author', flat=True)
+    following = Follow.objects.filter(
+        user=request.user
+    ).values_list('author', flat=True)
     return render(request, 'posts/follow.html', {
-        'page_obj': paginator(request, Post.objects.filter(author__in=following)),
+        'page_obj': paginator(
+            request,
+            Post.objects.filter(author__in=following)
+        ),
     })
+
 
 @login_required
 def profile_follow(request, username):
@@ -115,6 +123,7 @@ def profile_follow(request, username):
         author=User.objects.get(username=username)
     )
     return redirect('posts:profile', username)
+
 
 @login_required
 def profile_unfollow(request, username):
