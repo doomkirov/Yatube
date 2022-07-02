@@ -370,7 +370,8 @@ class ViewsTest(TestCase):
             reverse(
                 'posts:profile_follow',
                 kwargs={'username': self.author.username}
-        ))
+            )
+        )
         self.assertEqual(
             self.authorized_client.get(
                 reverse('posts:follow_index')
