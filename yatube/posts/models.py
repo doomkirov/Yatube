@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -91,3 +92,7 @@ class Follow(models.Model):
                 name='unique_follow'
             ),
         ]
+
+
+class Testing(models.Model):
+    text = models.TextField(verbose_name='hello')
