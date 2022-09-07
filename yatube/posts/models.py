@@ -92,7 +92,3 @@ class Follow(models.Model):
                 name='unique_follow'
             ),
         ]
-
-
-class Testing(models.Model):
-    text = models.TextField(verbose_name='hello')
